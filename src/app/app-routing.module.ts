@@ -1,3 +1,4 @@
+import { FormDirtyGuard } from './form-dirty.guard';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -10,7 +11,11 @@ import { Page1Component } from './page1/page1.component';
 import { Page2Component } from './page2/page2.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login',
+    canDeactivate: [FormDirtyGuard],
+    component: LoginComponent,
+  },
   {
     path: '',
     component: LayoutComponent,
