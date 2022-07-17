@@ -7,7 +7,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { Page1Component } from './page1/page1.component';
 import { Page2Component } from './page2/page2.component';
-import { ColorsComponent } from './utilities/colors/colors.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,10 +20,7 @@ const routes: Routes = [
       { path: 'page2', component: Page2Component, title: 'SB Admin 2 - Page 2' },
       {
         path: 'utilities',
-        children: [
-          { path: 'colors', component: ColorsComponent },
-          { path: 'colors/:type', component: ColorsComponent },
-        ]
+        loadChildren: () => import('./utilities/utilities.module').then(m => m.UtilitiesModule)
       },
       // { path: '**', component: NotFoundComponent },
     ]
