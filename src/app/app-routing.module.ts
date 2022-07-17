@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'page2', component: Page2Component, title: 'SB Admin 2 - Page 2' },
       {
         path: 'utilities',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./utilities/utilities.module').then(m => m.UtilitiesModule)
       },
       // { path: '**', component: NotFoundComponent },
