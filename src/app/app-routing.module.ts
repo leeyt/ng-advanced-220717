@@ -22,7 +22,8 @@ const routes: Routes = [
       {
         path: 'utilities',
         children: [
-          { path: 'colors', component: ColorsComponent }
+          { path: 'colors', component: ColorsComponent },
+          { path: 'colors/:type', component: ColorsComponent },
         ]
       },
       // { path: '**', component: NotFoundComponent },
