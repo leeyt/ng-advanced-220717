@@ -26,15 +26,18 @@ export class ColorsComponent implements OnInit {
     })
   }
 
-  incrementType() {
-    this.router.navigate(['/utilities/colors', +(this.type ?? 0) + 1 + ''], {
-      queryParamsHandling: 'preserve',
-    });
+  increment() {
+    this.updateType(+1);
   }
 
-  decrementType() {
-    this.router.navigate(['/utilities/colors', +(this.type ?? 0) - 1 + ''], {
+  decrement() {
+    this.updateType(-1);
+  }
+
+  private updateType(delta: number) {
+    this.router.navigate(['../', +(this.type ?? 0) + delta], {
       queryParamsHandling: 'preserve',
+      relativeTo: this.route
     });
   }
 }
