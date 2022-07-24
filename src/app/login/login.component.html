@@ -15,13 +15,25 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
-                <form class="user">
+                <form class="user" #form="ngForm" (ngSubmit)="doLogin(form)">
+<pre>form.name = {{ form.name }}
+form.value = {{ form.value | json }}
+form.valid = {{ form.valid }}
+form.invalid = {{ form.invalid }}
+form.touched = {{ form.touched }}
+form.untouched = {{ form.untouched }}
+form.pristine = {{ form.pristine }}
+form.dirty = {{ form.dirty }}
+form.enabled = {{ form.enabled }}
+form.disabled = {{ form.disabled }}
+form.status = {{ form.status }} (VALID, INVALID, DISABLED, PENDING)
+form.errors = {{ form.errors | json }}</pre>
                   <div class="form-group">
                     <input
                       type="email"
                       class="form-control form-control-user is-invalid"
                       [class.is-valid]="isValid(mEmail)"
-                      [class.is-invalid]="isInvalid(mEmail)"
+                      [class.is-invalid]="isInvalid(mEmail, form)"
                       id="exampleInputEmail"
                       aria-describedby="emailHelp"
                       placeholder="Enter Email Address..."
@@ -30,9 +42,9 @@
                       #mEmail="ngModel"
                       required email minlength="5"
                     />
-                    <p class="invalid-feedback" *ngIf="isInvalid(mEmail) && mEmail.errors?.['required']" >請輸入 Email 地址 (帳號)</p>
-                    <p class="invalid-feedback" *ngIf="isInvalid(mEmail) && mEmail.errors?.['email']" >請輸入合法的 Email 地址</p>
-<pre class="pull-left">
+                    <p class="invalid-feedback" *ngIf="isInvalid(mEmail, form) && mEmail.errors?.['required']" >請輸入 Email 地址 (帳號)</p>
+                    <p class="invalid-feedback" *ngIf="isInvalid(mEmail, form) && mEmail.errors?.['email']" >請輸入合法的 Email 地址</p>
+<pre>
 mEmail.name = {{ mEmail.name }}
 mEmail.value = {{ mEmail.value }}
 mEmail.valid = {{ mEmail.valid }}
@@ -52,7 +64,7 @@ mEmail.errors = {{ mEmail.errors | json }}
                       type="password"
                       class="form-control form-control-user"
                       [class.is-valid]="isValid(mPassword)"
-                      [class.is-invalid]="isInvalid(mPassword)"
+                      [class.is-invalid]="isInvalid(mPassword, form)"
                       id="exampleInputPassword"
                       placeholder="Password"
                       name="password"
@@ -72,9 +84,11 @@ mEmail.errors = {{ mEmail.errors | json }}
                       <label class="custom-control-label" for="customCheck">Remember Me</label>
                     </div>
                   </div>
-                  <a (click)="doLogin()" class="btn btn-primary btn-user btn-block">
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-user btn-block">
                     Login
-                  </a>
+                  </button>
                   <hr>
                   <a href="index.html" class="btn btn-google btn-user btn-block">
                     <i class="fab fa-google fa-fw"></i> Login with Google
