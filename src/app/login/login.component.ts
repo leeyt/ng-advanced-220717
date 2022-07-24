@@ -46,4 +46,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   isValid(control: NgModel) {
     return control.valid;
   }
+
+  disableField(control: NgModel) {
+    if (control.disabled) {
+      control.control.enable();
+    } else {
+      control.control.disable();
+    }
+  }
 }
