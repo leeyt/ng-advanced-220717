@@ -83,13 +83,14 @@ fc('email').errors = {{ fc('email').errors | json }}</pre>
                   <hr>
                   <h1>Profiles</h1>
                   <ng-container formArrayName="profiles">
+                    <button class="btn btn-primary" (click)="addProfile()">Add Profile</button>
                     <ng-container *ngFor="let item of form.controls.profiles.controls; let i = index" [formGroupName]="i">
                       <h2>{{ i + 1 }}</h2>
                       <div class="form-group">
                         <input
                           type="text"
                           class="form-control form-control-user"
-                          placeholder="請輸入程式"
+                          placeholder="請輸入城市"
                           formControlName="city"
                         />
                       </div>

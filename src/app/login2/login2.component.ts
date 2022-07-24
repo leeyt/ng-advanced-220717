@@ -28,14 +28,8 @@ export class Login2Component implements OnInit {
     isRememberMe: this.fb.control(true, {
     }),
     profiles: this.fb.array([
-      this.fb.group({
-        city: this.fb.control('Taipei', { validators: [Validators.required] }),
-        tel: this.fb.control('0988-888888', { validators: [Validators.required] }),
-      }),
-      this.fb.group({
-        city: this.fb.control('Taichung', { validators: [Validators.required] }),
-        tel: this.fb.control('0944-444444', { validators: [Validators.required] }),
-      })
+      this.makeProfile('Taipei', '0988-888888'),
+      this.makeProfile('台中', '0944-444444'),
     ])
   });
 
@@ -43,6 +37,8 @@ export class Login2Component implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder) {}
+
+
 
   ngOnInit(): void {
     document.body.className = 'bg-gradient-primary';
@@ -71,6 +67,18 @@ export class Login2Component implements OnInit {
 
   resetForm() {
     this.form.reset(this.data);
+  }
+
+  addProfile() {
+    this.form.controls.profiles.push(this.makeProfile('', ''));
+  }
+
+
+  private makeProfile(city: string, tel: string): FormGroup<{ city: FormControl<string | null>; tel: FormControl<string | null>; }> {
+    return this.fb.group({
+      city: this.fb.control(city, { validators: [Validators.required] }),
+      tel: this.fb.control(tel, { validators: [Validators.required] }),
+    });
   }
 
   // doLogin(form: NgForm) {
