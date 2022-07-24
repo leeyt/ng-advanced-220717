@@ -73,6 +73,32 @@ mEmail.errors = {{ mEmail.errors | json }}
                       #mPassword="ngModel"
                       required minlength="6" maxlength="32">
                   </div>
+                  <div ngModelGroup="tab1" #mTab1="ngModelGroup">
+                    <div class="form-group" (dblclick)="disableField(mAddress)">
+                      <input
+                        type="text"
+                        class="form-control form-control-user"
+                        [class.is-valid]="isValid(mAddress)"
+                        [class.is-invalid]="isInvalid(mAddress, form)"
+                        placeholder="Address"
+                        name="address"
+                        [(ngModel)]="data.tab1.address"
+                        #mAddress="ngModel"
+                        required minlength="6" maxlength="32">
+                    </div>
+                    <div class="form-group" (dblclick)="disableField(mPostalCode)">
+                      <input
+                        type="text"
+                        class="form-control form-control-user"
+                        [class.is-valid]="isValid(mPostalCode)"
+                        [class.is-invalid]="isInvalid(mPostalCode, form)"
+                        placeholder="Postal Code"
+                        name="postalCode"
+                        [(ngModel)]="data.tab1.postalCode"
+                        #mPostalCode="ngModel"
+                        required minlength="6" maxlength="32">
+                    </div>
+                  </div>
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">
                       <input
@@ -87,7 +113,8 @@ mEmail.errors = {{ mEmail.errors | json }}
                   </div>
                   <button
                     type="submit"
-                    class="btn btn-primary btn-user btn-block">
+                    class="btn btn-primary btn-user btn-block"
+                    [disabled]="form.invalid">
                     Login
                   </button>
                   <hr>

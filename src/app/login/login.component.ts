@@ -11,6 +11,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   data: any = {
     email: '',
     password: '',
+    tab1: {
+      address: '',
+      postalCode: ''
+    },
     isRememberMe: true
   };
 
