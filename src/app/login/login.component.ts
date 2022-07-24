@@ -1,12 +1,18 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgModel } from '@angular/forms';
 
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+
+  data: any = {
+    email: '',
+    password: '123',
+    isRememberMe: true
+  };
 
   private readonly orig_body_className = document.body.className;
 
@@ -31,4 +37,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(returnUrl);
   }
 
+  isInvalid(control: NgModel) {
+    return control.invalid && control.touched;
+  }
+
+  isValid(control: NgModel) {
+    return control.valid;
+  }
 }
