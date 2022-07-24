@@ -1,4 +1,4 @@
-import { FormBuilder, UntypedFormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, UntypedFormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -29,6 +29,18 @@ export class Login2Component implements OnInit {
 
   ngOnDestroy(): void {
     document.body.className = this.orig_body_className;
+  }
+
+  fc(name: string) {
+    return this.form.get(name) as FormControl;
+  }
+
+  fg(name: string) {
+    return this.form.get(name) as FormGroup;
+  }
+
+  fa(name: string) {
+    return this.form.get(name) as FormArray;
   }
 
   // doLogin(form: NgForm) {
