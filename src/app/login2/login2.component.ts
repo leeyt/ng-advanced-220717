@@ -12,6 +12,20 @@ export class Login2Component implements OnInit {
     password: '123123',
     // city: 'Taipei',
     isRememberMe: true,
+    profiles: [
+      {
+        "city": "Taipei",
+        "tel": "0988-888888"
+      },
+      {
+        "city": "台中",
+        "tel": "0944-444444"
+      },
+      {
+        "city": "Kaohsiung",
+        "tel": "0911-111111"
+      }
+    ]
   };
 
   orig_body_className = document.body.className;
@@ -38,14 +52,19 @@ export class Login2Component implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder) {}
 
-
-
   ngOnInit(): void {
     document.body.className = 'bg-gradient-primary';
 
     setTimeout(() => {
-      // this.form.setValue(this.data);
-      this.form.patchValue(this.data);
+      const numProfiles = this.data.profiles.length;
+
+      this.form.controls.profiles.clear();
+      this.data.profiles.forEach(profile => {
+        this.form.controls.profiles.push(this.makeProfile(profile.city, profile.tel));
+      });
+
+      this.form.setValue(this.data);
+      // this.form.patchValue(this.data);
     }, 2000);
   }
 
